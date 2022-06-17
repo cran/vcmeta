@@ -6,18 +6,19 @@
 #' 
 #' @description
 #' This function can be used to compute the standard error of a 
-#' 2-group mean difference using the two sample means, sample standard
-#' deviations, and sample sizes. The effect size estimate and standard 
-#' error output from this function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
-#' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
-#' applications where compatible mean differences from a combination of 2-group
+#' 2-group mean difference using the two estimated means, estimated 
+#' standard deviations, and sample sizes. The effect size estimate 
+#' and standard error output from this function can be used as input
+#' in the \link[vcmeta]{meta.ave.gen},  \link[vcmeta]{meta.lc.gen}, 
+#' and \link[vcmeta]{meta.lm.gen} functions in applications where 
+#' compatible mean differences from a combination of 2-group
 #' and paired-samples experiments are used in the meta-analysis. 
 #' 
 #' 
-#' @param    m1		sample mean for group 1 
-#' @param    m2		sample mean for group 2 
-#' @param    sd1	sample standard deviation for group 1
-#' @param    sd2	sample standard deviation for group 2
+#' @param    m1		estimated mean for group 1 
+#' @param    m2		estimated mean for group 2 
+#' @param    sd1	estimated standard deviation for group 1
+#' @param    sd2	estimated standard deviation for group 2
 #' @param    n1		group 1 sample size
 #' @param    n2		group 2 sample size
 #' 
@@ -57,20 +58,21 @@ se.mean2 <- function(m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @description
 #' This function can be used to compute the standard error of a 
-#' paired-samples mean difference using the two sample means, sample 
-#  standard deviations, Pearson correlation, and sample size. The 
-#' effect size estimate and standard error output from this function
-#' can be used as input in the \link[vcmeta]{meta.ave.gen}, 
-#' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
-#' applications where compatible mean differences from a combination of 2-group
+#' paired-samples mean difference using the two estimated means, 
+#  estimated standard deviations, estimated Pearson correlation, 
+#' and sample size. The effect size estimate and standard error 
+#' output from this function can be used as input in the
+#' \link[vcmeta]{meta.ave.gen}, #' \link[vcmeta]{meta.lc.gen}, 
+#' and \link[vcmeta]{meta.lm.gen} functions in applications where 
+#' compatible mean differences from a combination of 2-group
 #' and paired-samples experiments are used in the meta-analysis. 
 #' 
 #' 
-#' @param    m1		sample mean for measurement 1 
-#' @param    m2		sample mean for measurement 2 
-#' @param    sd1	sample standard deviation for measurement 1
-#' @param    sd2	sample standard deviation for measurement 2
-#' @param    cor	sample correlation for measurements 1 and 2
+#' @param    m1		estimated mean for measurement 1 
+#' @param    m2		estimated mean for measurement 2 
+#' @param    sd1	estimated standard deviation for measurement 1
+#' @param    sd2	estimated standard deviation for measurement 2
+#' @param    cor	estimated correlation for measurements 1 and 2
 #' @param    n		sample size
 #' 
 #' 
@@ -202,7 +204,6 @@ se.stdmean2 <- function(m1, m2, sd1, sd2, n1, n2, stdzr) {
 #' * set to 0 for square root average variance standardizer 
 #' * set to 1 for group 1 SD standardizer 
 #' * set to 2 for group 2 SD standardizer 
-#' * set to 3 for square root weighted variance standardizer
 #'  
 #' @return
 #' Returns a one-row matrix:
@@ -256,16 +257,17 @@ se.stdmean.ps <- function(m1, m2, sd1, sd2, cor, n, stdzr) {
 #'
 #' @description
 #' This function can be used to compute the standard error of a 
-#' Pearson or partial correlation using the sample correlation, sample 
-#' size, and number of control variables. The effect size estimate and 
-#' standard error output from this function can be used as input in the
-#' \link[vcmeta]{meta.ave.gen}, \link[vcmeta]{meta.lc.gen}, and
-#' \link[vcmeta]{meta.lm.gen} functions in applications where a combination
-#' of different types of correlations are used in the meta-analysis. 
+#' Pearson or partial correlation using the estimatede correlation, 
+#' sample size, and number of control variables. The effect size 
+#' estimate and standard error output from this function can be used 
+#' as input in the \link[vcmeta]{meta.ave.gen}, \link[vcmeta]{meta.lc.gen},
+#' and \link[vcmeta]{meta.lm.gen} functions in applications where a 
+#' combination of different types of correlations are used in the
+# meta-analysis. 
 #' 
 #' 
-#' @param    cor	sample Pearson or partial correlation  
-#' @param    q		number of control variables (0 for Pearson)  
+#' @param    cor	estimated Pearson or partial correlation  
+#' @param    s		number of control variables (0 for Pearson)  
 #' @param    n		sample size
 #'   
 #'   
@@ -288,8 +290,8 @@ se.stdmean.ps <- function(m1, m2, sd1, sd2, cor, n, stdzr) {
 #' 
 #' 
 #' @export
-se.cor <- function(cor, q, n) {
-  se.cor <- sqrt((1 - cor^2)^2/(n - 3 - q))
+se.cor <- function(cor, s, n) {
+  se.cor <- sqrt((1 - cor^2)^2/(n - 3 - s))
   out <- t(c(cor, se.cor))
   colnames(out) <- c("Estimate", "SE")
   rownames(out) <- c("Correlation:")
@@ -303,14 +305,14 @@ se.cor <- function(cor, q, n) {
 #' 
 #' @description
 #' This function can be used to compute the standard error of a 
-#' Spearman correlation using the sample correlation and sample 
+#' Spearman correlation using the estimated correlation and sample 
 #' size. The standard error from this function can be used as input 
 #' in the \link[vcmeta]{meta.ave.gen}, \link[vcmeta]{meta.lc.gen}, and
 #' \link[vcmeta]{meta.lm.gen} functions in applications where a combination
 #' of different types of correlations are used in the meta-analysis. 
 #' 
 #' 
-#' @param    cor		sample Spearman correlation  
+#' @param    cor		estimated Spearman correlation  
 #' @param    n		  sample size
 #'   
 #'   
@@ -348,7 +350,7 @@ se.spear <- function(cor, n) {
 #'
 #' @description
 #' This function can be used to compute the standard error of a 
-#' semipartial correlation using the sample correlation, sample 
+#' semipartial correlation using the estimated correlation, sample 
 #' size, and squared multiple correlation for the full model.
 #' The effect size estimate and standard error output from this 
 #' function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
@@ -357,8 +359,8 @@ se.spear <- function(cor, n) {
 #' are used in the meta-analysis. 
 #' 
 #' 
-#' @param    cor	sample semipartial correlation  
-#' @param    r2		squared multiple correlation for full model  
+#' @param    cor	estimated semipartial correlation  
+#' @param    r2		estimated squared multiple correlation for full model  
 #' @param    n		sample size
 #'   
 #'   
@@ -394,10 +396,10 @@ se.semipartial <- function(cor, r2, n) {
 #' @description
 #' The function computes a point-biserial correlation and its standard 
 #' error for two types of point-biserial correlations in 2-group designs
-#' using the sample means, sample standard deviations, and samples sizes.
-#' One type of point-biserial correlation uses an unweighted average of
-#' variances and is appropriate for 2-group experimental designs. The 
-#' other type of point-biserial correlation uses an weighted average of
+#' using the estimated means, estimated standard deviations, and samples
+#' sizes. One type of point-biserial correlation uses an unweighted average
+#' of variances and is appropriate for 2-group experimental designs. The 
+#' other type of point-biserial correlation uses a weighted average of
 #' variances and is appropriate for 2-group nonexperimental designs with
 #' simple random sampling. This function is useful in a meta-analysis of
 #' compatible point-biserial correlations where some studies used a 2-group 
@@ -407,10 +409,10 @@ se.semipartial <- function(cor, r2, n) {
 #' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions.
 #'
 #' 
-#' @param    m1		sample mean for group 1 
-#' @param    m2		sample mean for group 2 
-#' @param    sd1	sample standard deviation for group 1
-#' @param    sd2	sample standard deviation for group 2
+#' @param    m1		estimated mean for group 1 
+#' @param    m2		estimated mean for group 2 
+#' @param    sd1	estimated standard deviation for group 1
+#' @param    sd2	estimated standard deviation for group 2
 #' @param    n1		group 1 sample size
 #' @param    n2		group 2 sample size
 #' @param    type		
@@ -473,7 +475,7 @@ se.pbcor <- function(m1, m2, sd1, sd2, n1, n2, type) {
 #' contingency table. This function is useful in a meta-analysis of
 #' odds ratios where some studies report the sample odds ratio and its
 #' standard error and other studies only report the frequency counts
-#' (or a 2x2 contingency table. The log odds ratio and standard error 
+#' or a 2x2 contingency table. The log odds ratio and standard error 
 #' output from this function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
 #' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions.
 #' 
@@ -519,18 +521,19 @@ se.odds <- function(f1, n1, f2, n2) {
 #' 
 #' @description
 #' This function can be used to compute the standard error of a 
-#' 2-group mean ratio using the two sample means, sample standard
+#' 2-group mean ratio using the two estimated means, estimated standard
 #' deviations, and sample sizes. The effect size estimate and standard 
-#' error output from this function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
-#' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
-#' application where compatible mean ratios from a combination of 2-group
-#' and paired-samples experiments are used in the meta-analysis.
+#' error output from this function can be used as input in the
+#' \link[vcmeta]{meta.ave.gen},  \link[vcmeta]{meta.lc.gen}, and
+#' link[vcmeta]{meta.lm.gen} functions in application where compatible
+#' mean ratios from a combination of 2-group and paired-samples experiments
+#' are used in the meta-analysis.
 #' 
 #' 
-#' @param    m1		sample mean for group 1 
-#' @param    m2		sample mean for group 2 
-#' @param    sd1	sample standard deviation for group 1
-#' @param    sd2	sample standard deviation for group 2
+#' @param    m1		estimated mean for group 1 
+#' @param    m2		estimated mean for group 2 
+#' @param    sd1	estimated standard deviation for group 1
+#' @param    sd2	estimated standard deviation for group 2
 #' @param    n1		group 1 sample size
 #' @param    n2		group 2 sample size
 #' 
@@ -572,20 +575,20 @@ se.meanratio2 <- function(m1, m2, sd1, sd2, n1, n2) {
 #' 
 #' @description
 #' This function can be used to compute the standard error of a 
-#' paired-samples mean ratio using the two sample means, sample 
-#  standard deviations, Pearson correlation, and sample size. The 
-#' effect size estimate and standard error output from this function
-#' can be used as input in the \link[vcmeta]{meta.ave.gen}, 
+#' paired-samples mean ratio using the estimated eans, estimated
+#  standard deviations, estimated Pearson correlation, and sample 
+#' size. The effect size estimate and standard error output from
+#' this function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
 #' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
 #' application where compatible mean ratios from a combination of 2-group
 #' and paired-samples experiments are used in the meta-analysis. 
 #' 
 #' 
-#' @param    m1		sample mean for measurement 1 
-#' @param    m2		sample mean for measurement 2 
-#' @param    sd1	sample standard deviation for measurement 1
-#' @param    sd2	sample standard deviation for measurement 2
-#' @param    cor	smple correlation for measurements 1 and 2 
+#' @param    m1		estimated mean for measurement 1 
+#' @param    m2		estimated mean for measurement 2 
+#' @param    sd1	estimated standard deviation for measurement 1
+#' @param    sd2	estimated standard deviation for measurement 2
+#' @param    cor	estimated correlation for measurements 1 and 2 
 #' @param    n		sample size
 #' 
 #' 
@@ -627,16 +630,16 @@ se.meanratio.ps <- function(m1, m2, sd1, sd2, cor, n) {
 #'
 #' @description 
 #' This function can be used to compute a slope and its standard error
-#' for a simple linear regression model using the sample Pearson
-#' correlation and the standard deviations of response and predictor 
-#' variables. This function is useful in a meta-analysis of slopes of 
-#' a simple linear regression model where some studies report the Pearson 
-#' correlation but not the slope.
+#' for a simple linear regression model using the estimated Pearson
+#' correlation and the estimated standard deviations of response and 
+#' predictor variables. This function is useful in a meta-analysis of 
+#' slopes of a simple linear regression model where some studies report
+#' the Pearson correlation but not the slope.
 #' 
 #'
-#' @param    cor		sample Pearson correlation  
-#' @param    sdy		sample standard deviation of the response variable
-#' @param    sdx		sample standard deviation of the predictor variable
+#' @param    cor		estimated Pearson correlation  
+#' @param    sdy		estimated standard deviation of the response variable
+#' @param    sdx		estimated standard deviation of the predictor variable
 #' @param    n		  sample size
 #'   
 #' @return
@@ -668,4 +671,107 @@ se.slope <- function(cor, sdy, sdx, n) {
 }
 
 
+# se.prop2 
+#' Computes the Agresti-Caffo estimate and standard error for a 2-group
+#' proportion difference
+#' 
+#' 
+#' @description
+#' This function can be used to compute the standard error of a 
+#' 2-group proportion difference using the two sample proportions and sample
+#' sizes. The effect size estimate and standard error output from this
+#' function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
+#' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
+#' applications where compatible proportion differences from a combination of 
+#' 2-group and paired-samples studies are used in the meta-analysis. 
+#' 
+#' 
+#' @param    f1   number of participants in group 1 who have the outcome
+#' @param    f2	  number of participants in group 2 who have the outcome
+#' @param    n1	  group 1 sample size
+#' @param    n2	  group 2 sample size
+#' 
+#' 
+#' @return
+#' Returns a one-row matrix:
+#' * Estimate - estimate of proportion difference
+#' * SE - standard error
+#' 
+#'  
+#' @examples
+#' se.prop2(31, 16, 40, 40)
+#'
+#' # Should return:
+#' #                         Estimate        SE
+#' # Proportion difference: 0.3571429 0.1002777
+#' 
+#' 
+#' @references
+#' \insertRef{Agresti2000}{vcmeta}
+#'
+#'
+#' @export
+se.prop2 <- function(f1, f2, n1, n2) {
+ p1 <- (f1 + 1)/(n1 + 2)
+ p2 <- (f2 + 1)/(n2 + 2)
+ est <- p1 - p2
+ se <- sqrt(p1*(1 - p1)/(n1 + 2) + p2*(1 - p2)/(n2 + 2))
+ out <- t(c(est, se))
+ colnames(out) <- c("Estimate", "SE")
+ rownames(out) <- c("Proportion difference:")
+ return(out)
+}
+
+
+# se.prop.ps 
+#' Computes the Bonett-Price estimate and standard error for a paired-samples
+#' proportion difference
+#' 
+#' 
+#' @description
+#' This function can be used to compute the standard error of a 
+#' paired-samples proportion difference using the frequency counts from a 
+#' 2 x 2 contingency table. The effect size estimate and standard error
+#' output from this function can be used as input in the \link[vcmeta]{meta.ave.gen}, 
+#' \link[vcmeta]{meta.lc.gen}, and \link[vcmeta]{meta.lm.gen} functions in 
+#' applications where compatible proportion differences from a combination of
+#' 2-group and paired-samples studies are used in the meta-analysis. 
+#' 
+#' 
+#' @param   f00    number of participants with y = 0 and x = 0
+#' @param   f01    number of participants with y = 0 and x = 1
+#' @param   f10    number of participants with y = 1 and x = 0
+#' @param   f11    number of participants with y = 1 and x = 1
+#' 
+#' 
+#' @return
+#' Returns a one-row matrix:
+#' * Estimate - estimate of proportion difference
+#' * SE - standard error
+#' 
+#'  
+#' @examples
+#' se.prop.ps(16, 64, 5, 15)
+#'
+#' # Should return:
+#' #                         Estimate         SE
+#' # Proportion difference: 0.5784314 0.05953213
+#' 
+#' 
+#' @references
+#' \insertRef{Agresti2000}{vcmeta}
+#'
+#'
+#' @export
+se.prop.ps <- function(f00, f01, f10, f11) {
+ n <- f00 + f01 + f10 + f11
+ p01 <- (f01 + 1)/(n + 2)
+ p10 <- (f10 + 1)/(n + 2)
+ est <- p01 - p10
+ se <- sqrt(((p01 + p10) - (p01 - p10)^2)/(n + 2))
+ out <- t(c(est, se))
+ colnames(out) <- c("Estimate", "SE")
+ rownames(out) <- c("Proportion difference:")
+ return(out)
+}
 

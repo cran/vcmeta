@@ -12,11 +12,11 @@
 #'
 #'  
 #' @param alpha  	alpha level for 1-alpha confidence
-#' @param m1     	vector of sample means for group 1 
-#' @param m2     	vector of sample means for group 2 
-#' @param sd1    	vector of sample SDs for group 1
-#' @param sd2    	vector of sample SDs for group 2
-#' @param n1     	vector of group 1 sample size
+#' @param m1     	vector of estimated means for group 1 
+#' @param m2     	vector of estimated means for group 2 
+#' @param sd1    	vector of estimated SDs for group 1
+#' @param sd2    	vector of estimated SDs for group 2
+#' @param n1     	vector of group 1 sample sizes
 #' @param n2     	vector of group 2 sample sizes
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #'
@@ -102,18 +102,18 @@ meta.ave.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2, bystudy = TRUE) {
 #' is not assumed.
 #'
 #'
-#' @param alpha		 alpha level for 1-alpha confidence
-#' @param m1		 vector of sample means for group 1
-#' @param m2		 vector of sample means for group 2
-#' @param sd1		 vector of sample SDs for group 1
-#' @param sd2		 vector of sample SDs for group 2
+#' @param alpha	 alpha level for 1-alpha confidence
+#' @param m1		 vector of estimated means for group 1
+#' @param m2		 vector of estimated means for group 2
+#' @param sd1		 vector of estimated SDs for group 1
+#' @param sd2		 vector of estimated SDs for group 2
 #' @param n1		 vector of group 1 sample sizes
 #' @param n2		 vector of group 2 sample sizes
 #' @param stdzr
-#' * set to 0 for square root average variance standardizer 
+#' * set to 0 for square root unweighted  average variance standardizer 
 #' * set to 1 for group 1 SD standardizer 
 #' * set to 2 for group 2 SD standardizer 
-#' * set to 3 for square root weighted variance standardizer
+#' * set to 3 for square root weighted average variance standardizer
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
@@ -234,12 +234,12 @@ meta.ave.stdmean2 <- function(
 #'
 #'
 #' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of sample means for measurement 1 
-#' @param   m2		vector of sample means for measurement 2 
-#' @param   sd1		vector of sample SDs for measurement 1
-#' @param   sd2		vector of sample SDs for measurement 2
-#' @param   cor		vector of sample correlations for paired measurements
-#' @param   n		vector of sample sizes
+#' @param   m1		vector of estimated means for measurement 1 
+#' @param   m2		vector of estimated means for measurement 2 
+#' @param   sd1		vector of estimated SDs for measurement 1
+#' @param   sd2		vector of estimated SDs for measurement 2
+#' @param   cor		vector of estimated correlations for paired measurements
+#' @param   n		  vector of sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
@@ -324,15 +324,16 @@ meta.ave.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n, bystudy = TRUE) {
 #'
 #'
 #' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of sample means for measurement 1 
-#' @param   m2		vector of sample means for measurement 2 
-#' @param   sd1		vector of sample SDs for measurement 1
-#' @param   sd2		vector of sample SDs for measurement 2
-#' @param   cor		vector of sample correlations for paired measurements
-#' @param   n		vector of sample sizes
-#' @param   stdzr		set to 0 for square root average variance standardizer
-#'          	set to 1 for measurement 1 SD standardizer
-#'          	set to 2 for measurement 2 SD standardizer
+#' @param   m1		vector of estimated means for measurement 1 
+#' @param   m2		vector of estimated means for measurement 2 
+#' @param   sd1		vector of estimated SDs for measurement 1
+#' @param   sd2		vector of estimated SDs for measurement 2
+#' @param   cor		vector of estimated correlations for paired measurements
+#' @param   n		  vector of sample sizes
+#' @param   stdzr		
+#' * set to 0 for square root unweighted average variance standardizer 
+#' * set to 1 for group 1 SD standardizer 
+#' * set to 2 for group 2 SD standardizer 
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
@@ -443,11 +444,11 @@ meta.ave.stdmean.ps <- function(
 #'
 #'
 #' @param   alpha  	alpha level for 1-alpha confidence
-#' @param   m1     	vector of sample means for group 1
-#' @param   m2     	vector of sample means for group 2
-#' @param   sd1    	vector of sample SDs for group 1
-#' @param   sd2    	vector of sample SDs for group 2
-#' @param   n1     	vector of group 1 sample size
+#' @param   m1     	vector of estimated means for group 1
+#' @param   m2     	vector of estimated means for group 2
+#' @param   sd1    	vector of estimated SDs for group 1
+#' @param   sd2    	vector of estimated SDs for group 2
+#' @param   n1     	vector of group 1 sample sizes
 #' @param   n2     	vector of group 2 sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #'
@@ -458,7 +459,7 @@ meta.ave.stdmean.ps <- function(
 #'  * SE - standard error 
 #'  * LL - lower limit of the confidence interval
 #'  * UL - upper limit of the confidence interval 
-#'  * exp(Estimate) - the exponentiated estimate (the geometric mean)
+#'  * exp(Estimate) - the exponentiated estimate 
 #'  * exp(LL) - lower limit of the exponentiated confidence interval
 #'  * exp(UL) - upper limit of the exponentiated confidence interval
 #'  * df - degrees of freedom
@@ -554,12 +555,12 @@ meta.ave.meanratio2 <- function(
 #'
 #'
 #' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of sample means for measurement 1
-#' @param   m2		vector of sample means for measurement 2
-#' @param   sd1		vector of sample SDs for measurement 1
-#' @param   sd2		vector of sample SDs for measurement 2
-#' @param   cor		vector of sample correlations for paired measurements
-#' @param   n		vector of sample sizes
+#' @param   m1		vector of estimated means for measurement 1
+#' @param   m2		vector of estimated means for measurement 2
+#' @param   sd1		vector of estimated SDs for measurement 1
+#' @param   sd2		vector of estimated SDs for measurement 2
+#' @param   cor		vector of estimated correlations for paired measurements
+#' @param   n		  vector of sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
@@ -570,7 +571,7 @@ meta.ave.meanratio2 <- function(
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
-#'  * exp(Estimate) - the exponentiated estimate (the geometric mean)
+#'  * exp(Estimate) - the exponentiated estimate 
 #'  * exp(LL) - lower limit of the exponentiated confidence interval
 #'  * exp(UL) - upper limit of the exponentiated confidence interval
 #'  * df - degrees of freedom
@@ -656,16 +657,16 @@ meta.ave.meanratio.ps <- function(
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' average Pearson or partial correlation. The sample correlations must 
-#' be all Pearson correlations or all partial correlations. Use the 
-#' meta.ave.gen function to meta-analysis any combination of Pearson,
-#' partial, or Spearman correlations.
+#' average Pearson or partial correlation from two or more studies. The 
+#' sample correlations must be all Pearson correlations or all partial
+#' correlations. Use the meta.ave.gen function to meta-analyze any 
+#' combination of Pearson, partial, or Spearman correlations.
 #' 
 #' 
 #' @param alpha	alpha level for 1-alpha confidence
 #' @param n     	vector of sample sizes 
-#' @param cor   	vector of sample correlations 
-#' @param q     	number of control variables
+#' @param cor   	vector of estimated correlations 
+#' @param s     	number of control variables
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
@@ -698,11 +699,11 @@ meta.ave.meanratio.ps <- function(
 #' 
 #' @importFrom stats qnorm
 #' @export
-meta.ave.cor <- function(alpha, n, cor, q, bystudy = TRUE) {
+meta.ave.cor <- function(alpha, n, cor, s, bystudy = TRUE) {
   m <- length(n)
   z <- qnorm(1 - alpha/2)
   nt <- sum(n)
-  var.cor <- (1 - cor^2)^2/ (n - 3 - q)
+  var.cor <- (1 - cor^2)^2/ (n - 3 - s)
   ave.cor <- sum(cor)/m
   se.ave <- sqrt(sum(var.cor)/m^2)
   z.ave <- log((1 + ave.cor)/(1 - ave.cor))/2
@@ -713,8 +714,8 @@ meta.ave.cor <- function(alpha, n, cor, q, bystudy = TRUE) {
   out <- cbind(ave.cor, se.ave, ll, ul)
   row <- "Average"
   if (bystudy) {
-    se.cor <- sqrt((1 - cor^2)^2/ (n - 1 - q))
-    se.z <- sqrt(1/(n - 3 - q))
+    se.cor <- sqrt((1 - cor^2)^2/ (n - 1 - s))
+    se.z <- sqrt(1/(n - 3 - s))
     z.cor <- log((1 + cor)/(1 - cor))/2
     ll0 <- z.cor - z*se.z
     ul0 <- z.cor + z*se.z
@@ -737,16 +738,16 @@ meta.ave.cor <- function(alpha, n, cor, q, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' average slope coefficient in a simple linear regression model. A 
-#' Satterthwaite adjustment to the degrees of freedom is used to improve 
-#' the accuracy of the confidence interval.
+#' average slope coefficient in a simple linear regression model from two
+#' or more studies. A Satterthwaite adjustment to the degrees of freedom
+#' is used to improve the accuracy of the confidence interval.
 #' 
 #' 
 #' @param    alpha 	alpha level for 1-alpha confidence
 #' @param    n     	vector of sample sizes 
-#' @param    cor   	vector of sample correlations 
-#' @param    sdy   	vector of SDs of y
-#' @param    sdx   	vector of SDs of x
+#' @param    cor   	vector of estimated correlations 
+#' @param    sdy   	vector of estimated SDs of y
+#' @param    sdx   	vector of estimated SDs of x
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
@@ -817,8 +818,8 @@ meta.ave.slope <- function(alpha, n, cor, sdy, sdx, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' average slope coefficient from a general linear model (ANOVA, ANCOVA,
-#' multiple regression) or a path model.
+#' average slope coefficient in a general linear model (ANOVA, ANCOVA,
+#' multiple regression) or a path model from two or more studies.
 #'
 #'
 #' @param alpha alpha level for 1-alpha confidence
@@ -862,7 +863,7 @@ meta.ave.path <- function(alpha, n, slope, se, s, bystudy = TRUE) {
   ave.b <- sum(slope)/m
   se.ave <- sqrt(sum(var.b)/m^2)
   u1 <- sum(var.b)^2
-  u2 <- sum(var.b^2/(n - s- 1))
+  u2 <- sum(var.b^2/(n - s - 1))
   df <- u1/u2
   t <- qt(1 - alpha/2, df)
   ll <- ave.b - t*se.ave
@@ -891,15 +892,15 @@ meta.ave.path <- function(alpha, n, slope, se, s, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' average Spearman correlation. The Spearman correlation is preferred to
-#' the Pearson correlation if the relation between the two quantitative
-#' variables is monotonic rather than linear or if the bivariate normality 
-#' assumption is not plausible.
+#' average Spearman correlation from two or more studies. The Spearman 
+#' correlation is preferred to the Pearson correlation if the relation 
+#' between the two quantitative variables is monotonic rather than linear
+#' or if the bivariate normality assumption is not plausible.
 #'
 #'
 #' @param    alpha	  alpha level for 1-alpha confidence
 #' @param    n     	  vector of sample sizes 
-#' @param    cor   	  vector of sample Spearman correlations 
+#' @param    cor   	  vector of estimated Spearman correlations 
 #' @param    bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #'   
@@ -983,10 +984,10 @@ meta.ave.spear <- function(alpha, n, cor, bystudy = TRUE) {
 #'
 #' 
 #' @param    alpha 	alpha level for 1-alpha confidence
-#' @param    m1	  	vector of sample means for group 1 
-#' @param    m2     vector of sample means for group 2 
-#' @param    sd1		vector of sample SDs for group 1
-#' @param    sd2		vector of sample SDs for group 2
+#' @param    m1	  	vector of estimated means for group 1 
+#' @param    m2     vector of estimated means for group 2 
+#' @param    sd1		vector of estimated SDs for group 1
+#' @param    sd2		vector of estimated SDs for group 2
 #' @param    n1		  vector of group 1 sample sizes
 #' @param    n2		  vector of group 2 sample sizes
 #' @param    type		
@@ -1105,7 +1106,7 @@ meta.ave.pbcor <- function(
 #'
 #' @param    alpha 	alpha level for 1-alpha confidence
 #' @param    n     	vector of sample sizes 
-#' @param    cor   	vector of sample semipartial correlations 
+#' @param    cor   	vector of estimated semipartial correlations 
 #' @param    r2  	  vector of squared multiple correlations for full model
 #' @param bystudy   logical to also return each study estimate (TRUE) or not
 #' 
@@ -1181,7 +1182,7 @@ meta.ave.semipart <- function(alpha, n, cor, r2, bystudy = TRUE) {
 #' @param    alpha 	alpha level for 1-alpha confidence
 #' @param    n     	vector of sample sizes 
 #' @param    rel   	vector of sample reliabilities 
-#' @param    q     	number of measurements (e.g., items) used to compute 
+#' @param    r     	number of measurements (e.g., items) used to compute 
 #' each reliability
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #' 
@@ -1215,13 +1216,13 @@ meta.ave.semipart <- function(alpha, n, cor, r2, bystudy = TRUE) {
 #' 
 #' @importFrom stats qnorm
 #' @export
-meta.ave.cronbach <- function(alpha, n, rel, q, bystudy = TRUE) {
+meta.ave.cronbach <- function(alpha, n, rel, r, bystudy = TRUE) {
   m <- length(n)
   z <- qnorm(1 - alpha/2)
   nt <- sum(n)
   hn <- m/sum(1/n)
-  a <- ((q - 2)*(m - 1))^.25
-  var.rel <- 2*q*(1 - rel)^2/((q - 1)*(n - 2 - a))
+  a <- ((r - 2)*(m - 1))^.25
+  var.rel <- 2*r*(1 - rel)^2/((r - 1)*(n - 2 - a))
   ave.rel <- sum(rel)/m
   se.ave <- sqrt(sum(var.rel)/m^2)
   log.ave <- log(1 - ave.rel) - log(hn/(hn - 1))
@@ -1230,7 +1231,7 @@ meta.ave.cronbach <- function(alpha, n, rel, q, bystudy = TRUE) {
   out <- cbind(ave.rel, se.ave, ll, ul)
   row <- "Average"
   if (bystudy) {
-    se.rel <- sqrt(2*q*(1 - rel)^2/((q - 1)*(n - 2)))
+    se.rel <- sqrt(2*r*(1 - rel)^2/((r - 1)*(n - 2)))
     log.rel <- log(1 - rel) - log(n/(n - 1))
     ul <- 1 - exp(log.rel - z*se.rel/(1 - rel))
     ll <- 1 - exp(log.rel + z*se.rel/(1 - rel))
@@ -1250,7 +1251,7 @@ meta.ave.cronbach <- function(alpha, n, rel, q, bystudy = TRUE) {
 #'  
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
-#' geometric mean odds ratio from two or more studies. 
+#' geometric average odds ratio from two or more studies. 
 #'
 #'
 #' @param    alpha  	alpha level for 1-alpha confidence
@@ -1344,7 +1345,7 @@ meta.ave.odds <- function(alpha, f1, f2, n1, n2, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
-#' geometric mean proportion ratio from two or more studies. 
+#' geometric average proportion ratio from two or more studies. 
 #'
 #'
 #' @param    alpha  	alpha level for 1-alpha confidence
@@ -1678,13 +1679,80 @@ meta.ave.agree <- function(alpha, f11, f12, f21, f22, bystudy = TRUE) {
   return (out)
 }
 
+
+# meta.ave.var 
+#' Confidence interval for an average variance
+#'
+#'
+#' @description
+#' Computes the estimate and confidence interval for an average variance 
+#' from two or more studies. 
+#'
+#'  
+#' @param alpha  	alpha level for 1-alpha confidence
+#' @param var   	vector of sample variances 
+#' @param n     	vector of sample sizes
+#' @param bystudy logical to also return each study estimate (TRUE) or not
+#'
+#'
+#' @return Returns a matrix.  The first row is the average estimate
+#' across all studies.  If bystudy is true, there is 1 additional row for
+#' each study.  The matrix has the following columns:
+#' * Estimate - the estimated variance
+#' * LL - lower limit of the confidence interval
+#' * UL - upper limit of the confidence interval
+#' 
+#' 
+#' @examples
+#' var <- c(26.63, 22.45, 34.12)
+#' n <- c(40, 30, 50)
+#' meta.ave.var(.05, var, n, bystudy = TRUE)
+#'
+#' # Should return:
+#' #         Estimate       LL       UL
+#' # Average 27.73333 21.45679 35.84589
+#' # Study 1 26.63000 17.86939 43.90614
+#' # Study 2 22.45000 14.23923 40.57127
+#' # Study 3 34.12000 23.80835 52.98319
+#' 
+#' 
+#' @importFrom stats qnorm
+#' @importFrom stats qchisq
+#' @export
+meta.ave.var <- function(alpha, var, n, bystudy = TRUE) {
+ m <- length(n)
+ z <- qnorm(1 - alpha/2)
+ var.var <- 2*var^2/(n - 1)
+ ave.var <- sum(var)/m
+ se.ave <- sqrt(sum(var.var)/m^2)
+ ln.ave <- log(ave.var)
+ ll <- exp(ln.ave - z*se.ave/ave.var)
+ ul <- exp(ln.ave + z*se.ave/ave.var)
+ out <- cbind(ave.var, ll, ul)
+ row <- "Average"
+ if (bystudy) {
+   chi.U <- qchisq(1 - alpha/2, (n - 1))
+   ll <- (n - 1)*var/chi.U
+   chi.L <- qchisq(alpha/2, (n - 1))
+   ul <- (n - 1)*var/chi.L
+   row2 <- t(t(paste(rep("Study", m), seq(1,m))))
+   row <- rbind(row, row2)
+   out2 <- cbind(var, ll, ul)
+   out <- rbind(out, out2)
+ }
+ colnames(out) <- c("Estimate", "LL", "UL")
+ rownames(out) <- row
+ return (out)
+}
+
+
 #  meta.ave.gen
 #' Confidence interval for an average of any parameter 
 #' 
 #'
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' average of any type of parameter. 
+#' average of any type of parameter from two or more studies. 
 #' 
 #' @param    alpha	alpha level for 1-alpha confidence
 #' @param    est   	vector of parameter estimates 
@@ -1745,17 +1813,18 @@ meta.ave.gen <- function(alpha, est, se, bystudy = TRUE) {
 }
 
 
-#  meta.ave.cc
+#  meta.ave.gen.cc
 #' Confidence interval for an average effect size using a constant coefficient model 
 #'
 #'
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
-#' a weighted average effect using the constant coefficient (fixed-effect)
-#' meta-analysis model. The weighted average estimate will be biased regardless 
-#' of number of studies or sample size per study and the actual confidence interval
-#' coverage probability can be much smaller than the specified confidence level
-#' when the true effect sizes are not identical across studies. 
+#' weighted average effect from two or more studies using the constant
+#' coefficient (fixed-effect) meta-analysis model. The weighted average 
+#' estimate will be biased regardless of number of studies or sample size
+#' per study and the actual confidence interval coverage probability can
+#' be much smaller than the specified confidence level when the true effect
+#' sizes are not identical across studies. 
 #'    
 #' 
 #' @param    alpha 	alpha level for 1-alpha confidence
@@ -1822,26 +1891,28 @@ meta.ave.gen.cc <- function(alpha, est, se, bystudy = TRUE) {
 }
 
 
-#  meta.ave.rc
+#  meta.ave.gen.rc
 #' Confidence interval for an average effect size using a random coefficient model 
 #' 
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
-#' a weighted average effect using the random coefficient (random-effects)
-#' meta-analysis model. An estimate of effect-sze heterogeneity (tau-squared)
-#' is also computed. The random coefficient model assumes that the studies
-#' in the meta-analysis are a random sample from some definable superpopulation
-#' of studies. This assumption is difficult to justify. The weighted average
+#' a weighted average effect from multiple studies using the random 
+#' coefficient (random-effects) meta-analysis model. An estimate of 
+#' effect-sze heterogeneity (tau-squared) is also computed. The random 
+#' coefficient model assumes that the studies in the meta-analysis are 
+#' a random sample from some definable superpopulation of studies. This
+#' assumption is very difficult to justify. The weighted average
 #' estimate will be biased regardless of number of studies or sample size
 #' per study and the actual confidence interval coverage probability can 
 #' much smaller than the specified confidence level if the effect sizes are 
 #' correlated with the weights. This method also assume that the true effects 
 #' sizes in the superpopulation of studies have a normal distribution. A large
 #' number of studies, each with a large sample size, is required to assess the
-#' superpopulation normality assumption. The traditional confidence interval
-#' for the population tau-squared is hypersensitive to very minor and difficult
-#' to detect violations of the superpopulation normality assumption. 
+#' superpopulation normality assumption and to accurately estimate tau-squared. 
+#' The traditional confidence interval for the population tau-squared is 
+#' hypersensitive to very minor and difficult to detect violations of the 
+#' superpopulation normality assumption. 
 #' 
 #' 
 #' @param    alpha 	alpha level for 1-alpha confidence
@@ -1924,4 +1995,5 @@ meta.ave.gen.rc <- function(alpha, est, se, bystudy = TRUE) {
  rownames(out) <- row 
  return (out)
 }
+
 
