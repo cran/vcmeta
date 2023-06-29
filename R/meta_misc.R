@@ -1,13 +1,11 @@
-# ================= Miscellaneous Functions ============
-
-# ci.fisher
+# ci.fisher ============================================================
 #' Fisher confidence interval for any type of correlation.
 #' 
 #'
 #' @description 
 #' This function computes a confidence interval for any type
 #' correlation using an estimated correlation and its standard 
-#' error. This function should be used with the meta.ave.gen
+#' error. This function should be used with the \link[vcmeta]{meta.ave.gen}
 #' function when the effect size is a correlation. Use the 
 #' estimated average correlation and it standard error from 
 #' meta.ave.gen (when the effect size is a correlation) in the 
@@ -45,7 +43,7 @@ ci.fisher <- function(alpha, cor, se) {
 }
 
 
-#  cor.from.t
+#  cor.from.t =============================================================
 #' Compute Pearson correlation between paired measurements from t statistic
 #' 
 #' @description 
@@ -79,7 +77,7 @@ cor.from.t <- function(m1, m2, sd1, sd2, t, n) {
 }
 
 
-# meta.chitest 
+# meta.chitest ========================================================
 #' Computes a chi-square test of effect-size homogeneity
 #' 
 #'
@@ -92,7 +90,7 @@ cor.from.t <- function(m1, m2, sd1, sd2, t, n) {
 #' 
 #' 
 #' @param    est  	vector of effect-size estimates
-#' @param    se		vector of effect-size standard errors
+#' @param    se		  vector of effect-size standard errors
 #' 
 #' 
 #' @return
@@ -130,4 +128,39 @@ meta.chitest <- function(est, se) {
  return(out)
 } 
 
+
+#  stdmean2.from.t ============================================================
+#' Computes Cohen's d from pooled-variance t statistic
+#' 
+#'
+#' @description 
+#' This function computes Cohen's d for a 2-group design (which is a 
+#' standardized mean difference with a weighted variance standardizer) using 
+#' a pooled-variance independent-samples t statistic and the two sample sizes. 
+#' This function also computes the standard error for Cohen's d. The Cohen's d
+#' estimate and standard error assume equality of population variances. 
+#' 
+#' 
+#' @param t  	   pooled-variance t statistic  
+#' @param n1 	   sample size for group 1 
+#' @param n2 	   sample size for group 2 
+#'  
+#' @return
+#' Returns Cohen's d and its equal-variance standard error
+#' 
+#' @examples
+#' stdmean2.from.t(3.27, 25, 25)
+#'
+#' # Should return:
+#' #       Estimate       SE
+#' # [1,] 0.9439677 0.298801
+#' 
+#' @export
+stdmean2.from.t <- function(t, n1, n2) {
+  d <- t*sqrt(1/n1 + 1/n2)
+  se <- sqrt(d^2*(1/(n1 - 1) + 1/(n2 - 1))/8 + 1/n1 + 1/n2)
+  out <- t(c(d, se))
+  colnames(out) <- c("Estimate", "SE")
+  return (out)
+}
 
