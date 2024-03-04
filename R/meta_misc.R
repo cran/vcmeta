@@ -1,50 +1,52 @@
-# ci.fisher ============================================================
-#' Fisher confidence interval for any type of correlation.
+# meta.ave.fisher ============================================================
+#' Fisher confidence interval for an average correlation.
 #' 
 #'
 #' @description 
-#' This function computes a confidence interval for any type
-#' correlation using an estimated correlation and its standard 
-#' error. This function should be used with the \link[vcmeta]{meta.ave.gen}
-#' function when the effect size is a correlation. Use the 
-#' estimated average correlation and it standard error from 
-#' meta.ave.gen (when the effect size is a correlation) in the 
-#' ci.fisher function to obtain a more accurate confidence interval
-#' for the population average correlation. 
+#' This function should be used with the \link[vcmeta]{meta.ave.gen}
+#' function when the effect size is a correlation. Use the estimated average
+#' correlation and its standard error from meta.ave.gen in this function to 
+#' obtain a more accurate confidence interval for the population average 
+#' correlation. 
 #'
 #'
 #' @param alpha alpha value for 1-alpha confidence
-#' @param cor   estimate of correlation 
-#' @param se    standard error of estimated correlation
+#' @param cor   estimate of average correlation 
+#' @param se    standard error of average correlation
 #' 
 #' 
-#' @return A 2-element vector with lower and upper bounds of the confidence
-#' interval
+#' @return
+#' Returns a 1-row matrix. The columns are:
+#' * Estimate - estimate of average correlation (from input) 
+#' * LL - lower limit of the confidence interval
+#' * UL - lower limit of the confidence interval
 #' 
 #' @examples 
-#' ci.fisher(0.05, 0.50, .10)
+#' meta.ave.fisher(0.05, 0.376, .054)
 #'
 #' # Should return:
-#' # [1] 0.2802723 0.6699402
+#' # Estimate        LL        UL
+#' #    0.376 0.2656039 0.4766632
 #' 
 #' 
-#' @importFrom Rdpack reprompt
 #' @importFrom stats qnorm
 #' @export
-ci.fisher <- function(alpha, cor, se) {
+meta.ave.fisher <- function(alpha, cor, se) {
   z <- qnorm(1 - alpha/2)
   zr <- log((1 + cor)/(1 - cor))/2
   ll0 <- zr - z*se/(1 - cor^2)
   ul0 <- zr + z*se/(1 - cor^2)
   ll <- (exp(2*ll0) - 1)/(exp(2*ll0) + 1)
   ul <- (exp(2*ul0) - 1)/(exp(2*ul0) + 1)
-  out <- c(ll, ul)
+  out <- t(c(cor, ll, ul))
+  colnames(out) <- c("Estimate", "LL", "UL")
+  rownames(out) <- ""
   return(out)
 }
 
 
 #  cor.from.t =============================================================
-#' Compute Pearson correlation between paired measurements from t statistic
+#' Computes Pearson correlation between paired measurements from t statistic
 #' 
 #' @description 
 #' This function computes the Pearson correlation between paired 
@@ -68,12 +70,16 @@ ci.fisher <- function(alpha, cor, se) {
 #' cor.from.t(9.4, 9.8, 1.26, 1.40, 2.27, 30)
 #'
 #' # Should return:
-#' # [1] 0.7415209
+#' #                Estimate
+#' # Correlation:  0.7415209
 #' 
+#'
 #' @export
 cor.from.t <- function(m1, m2, sd1, sd2, t, n) {
-  cor <- ((sd1^2 + sd2^2) - n*(m1 - m2)^2/t^2)/(2*sd1*sd2)
-  return (cor)
+  out <- t(((sd1^2 + sd2^2) - n*(m1 - m2)^2/t^2)/(2*sd1*sd2))
+  colnames(out) <- c("Estimate")
+  rownames(out) <- c("Correlation: ")
+  return (out)
 }
 
 
@@ -85,8 +91,7 @@ cor.from.t <- function(m1, m2, sd1, sd2, t, n) {
 #' Computes a chi-square test of effect size homogeneity and p-value using 
 #' effect-size estimates and their standard errors from two or more studies.
 #' This test should not be used to justify the use of a constant coeffient
-#' (fixed-effect) meta-analysis. This test can be used to justify the 
-#' estimation of an average effect size in a varying coefficient model.
+#' (fixed-effect) meta-analysis. 
 #' 
 #' 
 #' @param    est  	vector of effect-size estimates
@@ -124,7 +129,7 @@ meta.chitest <- function(est, se) {
  p <- 1 - pchisq(Q, df)
  out <- t(c(Q, df, p))
  colnames(out) <- c("Q", "df", "p")
- rownames(out) <- c("")
+ rownames(out) <- ""
  return(out)
 } 
 
@@ -152,8 +157,8 @@ meta.chitest <- function(est, se) {
 #' stdmean2.from.t(3.27, 25, 25)
 #'
 #' # Should return:
-#' #       Estimate       SE
-#' # [1,] 0.9439677 0.298801
+#' #             Estimate       SE
+#' # Cohen's d  0.9439677 0.298801
 #' 
 #' @export
 stdmean2.from.t <- function(t, n1, n2) {
@@ -161,6 +166,151 @@ stdmean2.from.t <- function(t, n1, n2) {
   se <- sqrt(d^2*(1/(n1 - 1) + 1/(n2 - 1))/8 + 1/n1 + 1/n2)
   out <- t(c(d, se))
   colnames(out) <- c("Estimate", "SE")
+  rownames(out) <- c("Cohen's d: ")
   return (out)
 }
 
+
+#  table.from.odds ============================================================
+#' Computes the cell frequencies in a 2x2 table using the marginal proportions
+#' and odds ratio 
+#'                   
+#'                         
+#' @description 
+#' This function computes the cell proportions and frequencies in a 2x2 
+#' contingency table using the reported marginal proportions, estimated odds 
+#' ratio, and total sample size. The cell frequncies could then be used to
+#' compute other measures of effect size. In the output, "cell ij" refers to
+#' row i and column j.
+#' 
+#' 
+#' @param    p1row	    marginal proportion for row 1
+#' @param    p1col	    marginal proportion for column 1 
+#' @param    or         estimated odds ratio
+#' @param    n          total sample size
+#' 
+#' 
+#' @return A 2-row matrix. The rows are:
+#' * Row 1 gives the four computed cell proportions 
+#' * Row 2 gives the four computed cell frequencies
+#'
+#'
+#' The columns are:
+#' * cell 11 - proportion and frequency for cell 11
+#' * cell 12 - proportion and frequency for cell 12
+#' * cell 21 - proportion and frequency for cell 21
+#' * cell 22 - proportion and frequency for cell 22
+#'    
+#' 
+#' @examples
+#' table.from.odds(.17, .5, 3.18, 100)
+#'
+#' # Should return:
+#' #                cell 11    cell 12    cell 21    cell 22
+#' # Proportion:  0.1233262 0.04667383  0.3766738  0.4533262
+#' # Frequency:  12.0000000 5.00000000 38.0000000 45.0000000
+#' 
+#' 
+#' @references
+#' \insertRef{Bonett2007}{vcmeta}           
+#' 
+#' 
+#' @export
+table.from.odds <- function(p1row, p1col, or, n){
+ if (or <= 0) {stop("the odds ratio must be greater than 0")}
+ p2row <- 1 - p1row
+ if (or != 1){
+  a <- or*(p1row + p1col) + p2row - p1col
+  b <- sqrt(a^2 - 4*p1row*p1col*or*(or - 1))
+  p11 <- (a - b)/(2*(or - 1))}
+ else {
+  p11 <- p1row*p1col
+ }
+ p12 <- p1row - p11
+ p21 <- p1col - p11
+ p22 <- 1 - (p11 + p12 + p21)
+ f11 <- round(n*p11)
+ f12 <- round(n*p12)
+ f21 <- round(n*p21)
+ f22 <- n - (f11 + f12 + f21)
+ out1 <- t(c(p11, p12, p21, p22))
+ out2 <- t(c(f11, f12, f21, f22))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("cell 11", "cell 12", "cell 21", "cell 22")
+ rownames(out) <- c("Proportion:", "Frequency:")
+ return(out)
+}
+
+
+#  table.from.phi ============================================================
+#' Computes the cell frequencies in a 2x2 table using the marginal proportions
+#' and phi correlation 
+#'                   
+#'                         
+#' @description 
+#' This function computes the cell proportions and frequencies in a 2x2 
+#' contingency table using the reported marginal proportions, estimated phi  
+#' correlation, and total sample size. The cell frequncies could then be used  
+#' to compute other measures of effect size. In the output, "cell ij" refers 
+#' to row i and column j. 
+#' 
+#' 
+#' @param    p1row	    marginal proportion for row 1
+#' @param    p1col	    marginal proportion for column 1 
+#' @param    phi        estimated phi correlation
+#' @param    n          total sample size
+#' 
+#' 
+#' @return A 2-row matrix. The rows are:
+#' * Row 1 gives the four computed cell proportions 
+#' * Row 2 gives the four computed cell frequencies
+#'
+#'
+#' The columns are:
+#' * cell 11 - proportion and frequency for cell 11
+#' * cell 12 - proportion and frequency for cell 12
+#' * cell 21 - proportion and frequency for cell 21
+#' * cell 22 - proportion and frequency for cell 22
+#'    
+#' 
+#' @examples
+#' table.from.phi(.28, .64, .38, 200)
+#'
+#' # Should return:
+#' #                cell 11   cell 12    cell 21    cell 22
+#' # Proportion:  0.2610974 0.0189026  0.3789026  0.3410974
+#' # Frequency   52.0000000 4.0000000 76.0000000 68.0000000
+#' 
+#' 
+#' @export                                  
+table.from.phi <- function(p1row, p1col, phi, n){
+ if (abs(phi) > 1) {stop("phi must be between -1 and 1")}
+ p2row <- 1 - p1row
+ p2col <- 1 - p1col
+ phimax <- sqrt(p1col*p2row/(p1row*p2col))
+ if (phimax > 1) {phimax = 1/phimax}
+ phimin <- sqrt(p2col*p2row/(p1row*p1col))
+ if (phimin > 1) {phimin = 1/phimin}
+ if (phi > phimax) {stop("phi is too large for given marginal proportions")}
+ if (phi < -phimin) {stop("phi is too small for given marginal proportions")}
+ a <- sqrt(p1row*p2row*p1col*p2col)
+ p11 <- a*phi + p1row*p1col
+ p12 <- p1row - p11
+ p21 <- p1col - p11
+ p22 <- 1 - (p11 + p12 + p21)
+ f11 <- round(n*p11)
+ f12 <- round(n*p12)
+ f21 <- round(n*p21)
+ f22 <- n - (f11 + f12 + f21)
+ out1 <- t(c(p11, p12, p21, p22))
+ out2 <- t(c(f11, f12, f21, f22))
+ out <- rbind(out1, out2)
+ colnames(out) <- c("cell 11", "cell 12", "cell 21", "cell 22")
+ rownames(out) <- c("Proportion:", "Frequency")
+ return(out)
+}
+
+
+userefs <- function() {
+  Rdpack::c_Rd
+}

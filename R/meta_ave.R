@@ -6,23 +6,24 @@
 #' Computes the estimate, standard error, and confidence interval for an 
 #' average mean difference from two or more 2-group studies. A Satterthwaite 
 #' adjustment to the degrees of freedom is used to improve the accuracy of the
-#' confidence intervals. Equality of variances within or across studies is not assumed.
+#' confidence intervals. Equality of variances within or across studies is not
+#' assumed.
 #'
 #'  
-#' @param alpha  	alpha level for 1-alpha confidence
-#' @param m1     	vector of estimated means for group 1 
-#' @param m2     	vector of estimated means for group 2 
-#' @param sd1    	vector of estimated SDs for group 1
-#' @param sd2    	vector of estimated SDs for group 2
-#' @param n1     	vector of group 1 sample sizes
-#' @param n2     	vector of group 2 sample sizes
+#' @param alpha  	 alpha level for 1-alpha confidence
+#' @param m1     	 vector of estimated means for group 1 
+#' @param m2     	 vector of estimated means for group 2 
+#' @param sd1    	 vector of estimated SDs for group 1
+#' @param sd2    	 vector of estimated SDs for group 2
+#' @param n1     	 vector of group 1 sample sizes
+#' @param n2     	 vector of group 2 sample sizes
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy 
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -100,13 +101,13 @@ meta.ave.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2, bystudy = TRUE) {
 #' is not assumed.
 #'
 #'
-#' @param alpha	 alpha level for 1-alpha confidence
-#' @param m1		 vector of estimated means for group 1
-#' @param m2		 vector of estimated means for group 2
-#' @param sd1		 vector of estimated SDs for group 1
-#' @param sd2		 vector of estimated SDs for group 2
-#' @param n1		 vector of group 1 sample sizes
-#' @param n2		 vector of group 2 sample sizes
+#' @param alpha	  alpha level for 1-alpha confidence
+#' @param m1		  vector of estimated means for group 1
+#' @param m2		  vector of estimated means for group 2
+#' @param sd1		  vector of estimated SDs for group 1
+#' @param sd2		  vector of estimated SDs for group 2
+#' @param n1		  vector of group 1 sample sizes
+#' @param n2		  vector of group 2 sample sizes
 #' @param stdzr
 #' * set to 0 for square root unweighted  average variance standardizer 
 #' * set to 1 for group 1 SD standardizer 
@@ -118,7 +119,7 @@ meta.ave.mean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2, bystudy = TRUE) {
 #' @return
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -222,20 +223,20 @@ meta.ave.stdmean2 <- function(alpha, m1, m2, sd1, sd2, n1, n2, stdzr, bystudy = 
 #' Equality of variances within or across studies is not assumed.
 #'
 #'
-#' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of estimated means for measurement 1 
-#' @param   m2		vector of estimated means for measurement 2 
-#' @param   sd1		vector of estimated SDs for measurement 1
-#' @param   sd2		vector of estimated SDs for measurement 2
-#' @param   cor		vector of estimated correlations for paired measurements
-#' @param   n		  vector of sample sizes
+#' @param   alpha		 alpha level for 1-alpha confidence
+#' @param   m1		   vector of estimated means for measurement 1 
+#' @param   m2		   vector of estimated means for measurement 2 
+#' @param   sd1		   vector of estimated SDs for measurement 1
+#' @param   sd2		   vector of estimated SDs for measurement 2
+#' @param   cor		   vector of estimated correlations for paired measurements
+#' @param   n		     vector of sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -314,12 +315,12 @@ meta.ave.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n, bystudy = TRUE) {
 #'
 #'
 #' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of estimated means for measurement 1 
-#' @param   m2		vector of estimated means for measurement 2 
-#' @param   sd1		vector of estimated SDs for measurement 1
-#' @param   sd2		vector of estimated SDs for measurement 2
-#' @param   cor		vector of estimated correlations for paired measurements
-#' @param   n		  vector of sample sizes
+#' @param   m1		  vector of estimated means for measurement 1 
+#' @param   m2		  vector of estimated means for measurement 2 
+#' @param   sd1		  vector of estimated SDs for measurement 1
+#' @param   sd2		  vector of estimated SDs for measurement 2
+#' @param   cor		  vector of estimated correlations for paired measurements
+#' @param   n		    vector of sample sizes
 #' @param   stdzr		
 #' * set to 0 for square root unweighted average variance standardizer 
 #' * set to 1 for group 1 SD standardizer 
@@ -330,7 +331,7 @@ meta.ave.mean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -424,24 +425,24 @@ meta.ave.stdmean.ps <- function(alpha, m1, m2, sd1, sd2, cor, n, stdzr, bystudy 
 #' confidence intervals. Equality of variances within or across studies is not assumed.
 #'
 #'
-#' @param   alpha  	alpha level for 1-alpha confidence
-#' @param   m1     	vector of estimated means for group 1
-#' @param   m2     	vector of estimated means for group 2
-#' @param   sd1    	vector of estimated SDs for group 1
-#' @param   sd2    	vector of estimated SDs for group 2
-#' @param   n1     	vector of group 1 sample sizes
-#' @param   n2     	vector of group 2 sample sizes
+#' @param   alpha  	 alpha level for 1-alpha confidence
+#' @param   m1     	 vector of estimated means for group 1
+#' @param   m2     	 vector of estimated means for group 2
+#' @param   sd1    	 vector of estimated SDs for group 1
+#' @param   sd2    	 vector of estimated SDs for group 2
+#' @param   n1     	 vector of group 1 sample sizes
+#' @param   n2     	 vector of group 2 sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy 
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns: 
-#'  * Estimate - the estimated effect size 
+#'  * Estimate - estimated effect size 
 #'  * SE - standard error 
 #'  * LL - lower limit of the confidence interval
 #'  * UL - upper limit of the confidence interval 
-#'  * exp(Estimate) - the exponentiated estimate 
+#'  * exp(Estimate) - exponentiated estimate 
 #'  * exp(LL) - lower limit of the exponentiated confidence interval
 #'  * exp(UL) - upper limit of the exponentiated confidence interval
 #'  * df - degrees of freedom
@@ -519,24 +520,24 @@ meta.ave.meanratio2 <- function(alpha, m1, m2, sd1, sd2, n1, n2, bystudy = TRUE)
 #' of variances within or across studies is not assumed.
 #'
 #'
-#' @param   alpha		alpha level for 1-alpha confidence
-#' @param   m1		vector of estimated means for measurement 1
-#' @param   m2		vector of estimated means for measurement 2
-#' @param   sd1		vector of estimated SDs for measurement 1
-#' @param   sd2		vector of estimated SDs for measurement 2
-#' @param   cor		vector of estimated correlations for paired measurements
-#' @param   n		  vector of sample sizes
+#' @param   alpha		 alpha level for 1-alpha confidence
+#' @param   m1		   vector of estimated means for measurement 1
+#' @param   m2		   vector of estimated means for measurement 2
+#' @param   sd1		   vector of estimated SDs for measurement 1
+#' @param   sd2		   vector of estimated SDs for measurement 2
+#' @param   cor		   vector of estimated correlations for paired measurements
+#' @param   n		     vector of sample sizes
 #' @param   bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
-#'  * exp(Estimate) - the exponentiated estimate 
+#'  * exp(Estimate) - exponentiated estimate 
 #'  * exp(LL) - lower limit of the exponentiated confidence interval
 #'  * exp(UL) - upper limit of the exponentiated confidence interval
 #'  * df - degrees of freedom
@@ -611,17 +612,17 @@ meta.ave.meanratio.ps <- function(alpha, m1, m2, sd1, sd2, cor, n, bystudy = TRU
 #' combination of Pearson, partial, or Spearman correlations.
 #' 
 #' 
-#' @param alpha	alpha level for 1-alpha confidence
-#' @param n     	vector of sample sizes 
-#' @param cor   	vector of estimated correlations 
-#' @param s     	number of control variables (set to 0 for Pearson)
+#' @param alpha	   alpha level for 1-alpha confidence
+#' @param n     	 vector of sample sizes 
+#' @param cor   	 vector of estimated correlations 
+#' @param s     	 number of control variables (set to 0 for Pearson)
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -696,13 +697,13 @@ meta.ave.cor <- function(alpha, n, cor, s, bystudy = TRUE) {
 #' @param    cor   	vector of estimated correlations 
 #' @param    sdy   	vector of estimated SDs of y
 #' @param    sdx   	vector of estimated SDs of x
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param bystudy   logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -770,18 +771,18 @@ meta.ave.slope <- function(alpha, n, cor, sdy, sdx, bystudy = TRUE) {
 #' multiple regression) or a path model from two or more studies.
 #'
 #'
-#' @param alpha alpha level for 1-alpha confidence
-#' @param n     vector of sample sizes 
-#' @param slope vector of slope estimates 
-#' @param se    vector of slope standard errors
-#' @param s     number of predictors of the response variable
+#' @param alpha    alpha level for 1-alpha confidence
+#' @param n        vector of sample sizes 
+#' @param slope    vector of slope estimates 
+#' @param se       vector of slope standard errors
+#' @param s        number of predictors of the response variable
 #' @param bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy 
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -855,7 +856,7 @@ meta.ave.path <- function(alpha, n, slope, se, s, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -925,10 +926,11 @@ meta.ave.spear <- function(alpha, n, cor, bystudy = TRUE) {
 #' of point-biserial correlations can be meta-analyzed. One type uses
 #' an unweighted variance and is appropriate in 2-group experimental
 #' designs. The other type uses a weighted variance and is appropriate in
-#' 2-group nonexperimental designs with simple random sampling within each 
-#' group. This function requires all point-biserial correlations to be of
-#' the same type.  Use the meta.ave.gen function to meta-analyze any
-#' combination of biserial correlation types. 
+#' 2-group nonexperimental designs with simple random sampling (but not
+#' stratified random sample) within each study. This function requires 
+#' all point-biserial correlations to be of the same type.  Use the
+#' meta.ave.gen function to meta-analyze any combination of biserial
+#' correlation types. 
 #'
 #' 
 #' @param    alpha 	alpha level for 1-alpha confidence
@@ -941,13 +943,13 @@ meta.ave.spear <- function(alpha, n, cor, bystudy = TRUE) {
 #' @param    type		
 #' * set to 1 for weighted variance
 #' * set to 2 for unweighted variance
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param bystudy   logical to also return each study estimate (TRUE) or not
 #' 
 #'    
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1052,7 +1054,7 @@ meta.ave.pbcor <- function(alpha, m1, m2, sd1, sd2, n1, n2, type, bystudy = TRUE
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1121,15 +1123,14 @@ meta.ave.semipart <- function(alpha, n, cor, r2, bystudy = TRUE) {
 #' @param    alpha 	alpha level for 1-alpha confidence
 #' @param    n     	vector of sample sizes 
 #' @param    rel   	vector of sample reliabilities 
-#' @param    r     	number of measurements (e.g., items) used to compute 
-#' each reliability
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param    r     	number of measurements (e.g., items) used to compute each reliability
+#' @param bystudy   logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1195,7 +1196,7 @@ meta.ave.cronbach <- function(alpha, n, rel, r, bystudy = TRUE) {
 #'
 #'
 #' @param    alpha  	alpha level for 1-alpha confidence
-#' @param    f1     	vector of group 1 frequency counts
+#' @param    f1     	vector of group 1 frequency counts 
 #' @param    f2     	vector of group 2 frequency counts
 #' @param    n1     	vector of group 1 sample sizes 
 #' @param    n2     	vector of group 2 sample sizes
@@ -1205,7 +1206,7 @@ meta.ave.cronbach <- function(alpha, n, rel, r, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1291,11 +1292,11 @@ meta.ave.odds <- function(alpha, f1, f2, n1, n2, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
-#' * exp(Estimate) - the exponentiated estimate
+#' * exp(Estimate) - exponentiated estimate
 #' * exp(LL) - lower limit of the exponentiated confidence interval
 #' * exp(UL) - upper limit of the exponentiated confidence interval
 #' 
@@ -1382,7 +1383,7 @@ meta.ave.propratio2 <- function(alpha, f1, f2, n1, n2, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1462,13 +1463,13 @@ meta.ave.prop2 <- function(alpha, f1, f2, n1, n2, bystudy = TRUE) {
 #' @param    f12    	vector of frequency counts in cell 1,2
 #' @param    f21    	vector of frequency counts in cell 2,1
 #' @param    f22    	vector of frequency counts in cell 2,2
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param bystudy     logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1534,9 +1535,10 @@ meta.ave.prop.ps <- function(alpha, f11, f12, f21, f22, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
-#' G-index of agreement from two or more studies. This function assumes
-#' that two raters each provide a dichotomous rating to a sample of objects. 
-#' The G-index of agreement is usually preferred to Cohen's kappa.
+#' average G-index of agreement from two or more studies. This function 
+#' assumes that two raters each provide a dichotomous rating to a sample
+#' of objects. As a measure of agreement, the G-index is usually preferred
+#' to Cohen's kappa.
 #'
 #'
 #' @param    alpha  	alpha level for 1-alpha confidence
@@ -1550,7 +1552,7 @@ meta.ave.prop.ps <- function(alpha, f11, f12, f21, f22, bystudy = TRUE) {
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1610,19 +1612,21 @@ meta.ave.agree <- function(alpha, f11, f12, f21, f22, bystudy = TRUE) {
 #'
 #' @description
 #' Computes the estimate and confidence interval for an average variance 
-#' from two or more studies. 
+#' from two or more studies. The estimated average variance or the
+#' upper limit could be used as a variance planning value in sample
+#' size planning.
 #'
 #'  
-#' @param alpha  	alpha level for 1-alpha confidence
-#' @param var   	vector of sample variances 
-#' @param n     	vector of sample sizes
-#' @param bystudy logical to also return each study estimate (TRUE) or not
+#' @param alpha  	 alpha level for 1-alpha confidence
+#' @param var   	 vector of sample variances 
+#' @param n     	 vector of sample sizes
+#' @param bystudy  logical to also return each study estimate (TRUE) or not
 #'
 #'
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated variance
+#' * Estimate - estimated variance
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
 #' 
@@ -1677,17 +1681,18 @@ meta.ave.var <- function(alpha, var, n, bystudy = TRUE) {
 #' @description
 #' Computes the estimate, standard error, and confidence interval for an 
 #' average of any type of parameter from two or more studies. 
+#'
 #' 
-#' @param    alpha	alpha level for 1-alpha confidence
-#' @param    est   	vector of parameter estimates 
-#' @param    se    	vector of standard errors
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param    alpha  	alpha level for 1-alpha confidence
+#' @param    est     	vector of parameter estimates 
+#' @param    se      	vector of standard errors
+#' @param    bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1745,23 +1750,34 @@ meta.ave.gen <- function(alpha, est, se, bystudy = TRUE) {
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
 #' weighted average effect from two or more studies using the constant
-#' coefficient (fixed-effect) meta-analysis model. The weighted average 
-#' estimate will be biased regardless of number of studies or sample size
-#' per study and the actual confidence interval coverage probability can
-#' be much smaller than the specified confidence level when the true effect
-#' sizes are not identical across studies. 
+#' coefficient (fixed-effect) meta-analysis model. 
+#'
+#'
+#' @details
+#' The weighted average estimate will be biased regardless of the number of 
+#' studies or the sample size in each study. The actual confidence interval 
+#' coverage probability can be much smaller than the specified confidence
+#' level when the population effect sizes are not identical across studies. 
+#'
+#' The constant coefficient model should be used with caution, and the varying
+#' coefficient methods in this package are the recommended alternatives. The 
+#' varying coefficient methods do not require effect-size homogeneity across 
+#' the selected studies. This constant coefficient meta-analysis function is 
+#' included in the vcmeta package primarily for classroom  demonstrations to 
+#' illustrate the problematic characteristics of the constant coefficient 
+#' meta-analysis model.
 #'    
 #' 
-#' @param    alpha 	alpha level for 1-alpha confidence
-#' @param    est   	vector of parameter estimates 
-#' @param    se    	vector of standard errors
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param    alpha   	  alpha level for 1-alpha confidence
+#' @param    est     	  vector of parameter estimates 
+#' @param    se      	  vector of standard errors
+#' @param    bystudy    logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is TRUE, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1788,6 +1804,9 @@ meta.ave.gen <- function(alpha, est, se, bystudy = TRUE) {
 #' @references
 #' * \insertRef{Hedges1985}{vcmeta}
 #' * \insertRef{Borenstein2009}{vcmeta}
+#'
+#'
+#' @seealso \link[vcmeta]{meta.ave.gen}
 #' 
 #' 
 #' @importFrom stats qnorm
@@ -1823,34 +1842,47 @@ meta.ave.gen.cc <- function(alpha, est, se, bystudy = TRUE) {
 #' 
 #' @description
 #' Computes the estimate, standard error, and confidence interval for a 
-#' a weighted average effect from multiple studies using the random 
+#' weighted average effect from multiple studies using the random 
 #' coefficient (random-effects) meta-analysis model. An estimate of 
-#' effect-sze heterogeneity (tau-squared) is also computed. The random 
-#' coefficient model assumes that the studies in the meta-analysis are 
-#' a random sample from some definable superpopulation of studies. This
-#' assumption is very difficult to justify. The weighted average
-#' estimate will be biased regardless of number of studies or sample size
-#' per study and the actual confidence interval coverage probability can 
+#' effect-size heterogeneity (tau-squared) is also computed. 
+#'
+#'
+#' @details
+#' The random coefficient model assumes that the studies in the meta-analysis
+#' are a random sample from some definable superpopulation of studies. This
+#' assumption is very difficult to justify. The weighted average estimate
+#' will be biased regardless of the number of studies or the sample size
+#' in each study. The actual confidence interval coverage probability can 
 #' much smaller than the specified confidence level if the effect sizes are 
-#' correlated with the weights. This method also assume that the true effects 
-#' sizes in the superpopulation of studies have a normal distribution. A large
-#' number of studies, each with a large sample size, is required to assess the
-#' superpopulation normality assumption and to accurately estimate tau-squared. 
-#' The traditional confidence interval for the population tau-squared is 
-#' hypersensitive to very minor and difficult to detect violations of the 
+#' correlated with the weights (which occurs frequently). The confidence 
+#' interval for tau-squared assumes that the true effect sizes in the
+#' superpopulation of studies have a normal distribution. A large number 
+#' of studies, each with a large sample size, is required to assess the 
+#' superpopulation normality assumption and to accurately estimate 
+#' tau-squared. The confidence interval for the population tau-squared is
+#' hypersensitive to very minor and difficult-to-detect violations of the 
 #' superpopulation normality assumption. 
+#'
+#' The random coefficient model should be used with caution, and the varying 
+#' coefficient methods in this package are the recommended alternative. The 
+#' varying coefficient methods allows the effect sizes to differ across studies
+#' but do not require the studies to be a random sample from a definable 
+#' superpopoulation of studies. This random coefficient function is included 
+#' in the vcmeta package primarily for classroom demonstrations to illustrate
+#' the problimatic characteristics of the random coefficient meta-analysis
+#' model.
 #' 
 #' 
-#' @param    alpha 	alpha level for 1-alpha confidence
-#' @param    est   	vector of parameter estimates 
-#' @param    se    	vector of standard errors
-#' @param bystudy  logical to also return each study estimate (TRUE) or not
+#' @param    alpha    alpha level for 1-alpha confidence
+#' @param    est      vector of parameter estimates 
+#' @param    se       vector of standard errors
+#' @param    bystudy  logical to also return each study estimate (TRUE) or not
 #' 
 #' 
 #' @return 
 #' Returns a matrix.  The first row is the average estimate across all studies.  If bystudy
 #' is true, there is 1 additional row for each study.  The matrix has the following columns:
-#' * Estimate - the estimated effect size
+#' * Estimate - estimated effect size
 #' * SE - standard error
 #' * LL - lower limit of the confidence interval
 #' * UL - upper limit of the confidence interval
@@ -1877,6 +1909,9 @@ meta.ave.gen.cc <- function(alpha, est, se, bystudy = TRUE) {
 #' @references
 #' * \insertRef{Hedges1985}{vcmeta}
 #' * \insertRef{Borenstein2009}{vcmeta}
+#'
+#'
+#' @seealso \link[vcmeta]{meta.ave.gen}
 #' 
 #' 
 #' @importFrom stats qnorm
@@ -1907,8 +1942,10 @@ meta.ave.gen.rc <- function(alpha, est, se, bystudy = TRUE) {
  ul <- w2.est + z*se.w2
  out1 <- cbind(t2, se.t2, ll.t2, ul.t2)
  out2 <- cbind(w2.est, se.w2, ll, ul)
+ out <- rbind(out1, out2)
  row1 <- "Tau-squared"
  row2 <- "Average"
+ row <- rbind(row1, row2)
  if (bystudy) {
    ll <- est - z*se
    ul <- est + z*se

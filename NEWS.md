@@ -1,4 +1,16 @@
-vcmeta v1.2.0 (Release date: 2023/06/xx)
+vcmeta v1.3.0 (Release date: 2024/03/04)
+==============
+
+Changes:
+
+* New functions: se.cohen, replicate.ratio.prop2, replicate.prop.ps, table.from.odds, table.from.phi, meta.sub.gen
+* The ci.fisher function has been renamed meta.ave.fisher
+* Corrected output error in meta.ave.gen.rc function when bystudy = FALSE 
+* cor.from.t now returns a 1x1 matrix with column 'Estimate'
+
+
+
+vcmeta v1.2.0 (Release date: 2023/06/26)
 ==============
 
 Changes:
