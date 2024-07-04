@@ -1,7 +1,7 @@
 Package: vcmeta
 Type: Package
 Title: Varying Coefficient Meta-Analysis
-Version: 1.3.0
+Version: 1.4.0
 Authors@R: c(
     person("Douglas G.", "Bonett", email = "dgbonett@ucsc.edu", role = c("aut", "cre")),
     person("Robert J.", "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
@@ -23,9 +23,9 @@ RdMacros: Rdpack, mathjaxr
 Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-03-04 14:51:20 UTC; rcali
+Packaged: 2024-07-04 12:40:11 UTC; rcali
 Author: Douglas G. Bonett [aut, cre],
   Robert J. Calin-Jageman [ctb]
 Maintainer: Douglas G. Bonett <dgbonett@ucsc.edu>
 Repository: CRAN
-Date/Publication: 2024-03-04 16:50:02 UTC
+Date/Publication: 2024-07-04 15:20:02 UTC
