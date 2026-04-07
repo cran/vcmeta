@@ -1,7 +1,7 @@
 Package: vcmeta
 Type: Package
 Title: Varying Coefficient Meta-Analysis
-Version: 1.5.0
+Version: 1.6.0
 Authors@R: c(
     person(given = "Douglas G.", family = "Bonett", email = "dgbonett@ucsc.edu", role = c("aut", "cre")),
     person(given = "Robert J.", family = "Calin-Jageman", email = "rcalinjageman@dom.edu", role = c("ctb")))
@@ -19,14 +19,14 @@ BugReports: https://github.com/dgbonett/vcmeta/issues
 License: GPL-3
 Encoding: UTF-8
 Imports: stats, mathjaxr, Rdpack, ggplot2
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 RdMacros: Rdpack, mathjaxr
 Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-08-26 01:31:43 UTC; rcali
+Packaged: 2026-04-07 20:14:18 UTC; rcali
 Author: Douglas G. Bonett [aut, cre],
   Robert J. Calin-Jageman [ctb]
 Maintainer: Douglas G. Bonett <dgbonett@ucsc.edu>
 Repository: CRAN
-Date/Publication: 2025-08-26 04:20:02 UTC
+Date/Publication: 2026-04-07 21:00:02 UTC
